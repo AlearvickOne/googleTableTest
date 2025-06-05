@@ -27,6 +27,10 @@ export class GoogleSheetsController {
       throw new Error('Отсутствует ID google sheets');
     }
 
+    if (!this.sheetName) {
+      throw new Error('Отсутствует название листа');
+    }
+
     return await this.googleSheetsService.getSheetData(this.GOOGLE_SPREADSHEET_ID, this.sheetName);
   }
 
@@ -38,6 +42,10 @@ export class GoogleSheetsController {
 
     if (!this.sheetName) {
       throw new Error('Отсутствует название листа');
+    }
+
+    if (!body) {
+      throw new Error('Отсутствуют данные для изменения');
     }
 
     return await this.googleSheetsService.updateSingleCell(this.GOOGLE_SPREADSHEET_ID, this.sheetName, body);
