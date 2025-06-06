@@ -24,7 +24,10 @@ class ExcelTableStore {
     try {
       this.setIsLoading(true);
       const namesSheets = await excelTableService.getNamesSheets();
-      this.namesSheets = Array.isArray(namesSheets) ? namesSheets : [];
+
+      runInAction(() => {
+        this.namesSheets = Array.isArray(namesSheets) ? namesSheets : [];
+      });
     } catch (e: any) {
       this.errorMessage = e.message;
     } finally {
@@ -41,8 +44,10 @@ class ExcelTableStore {
 
       const data = await excelTableService.getDataGoogleSheets(sheetName);
 
-      this.data = Array.isArray(data) ? data : [];
-      this.errorMessage = '';
+      runInAction(() => {
+        this.data = Array.isArray(data) ? data : [];
+        this.errorMessage = '';
+      });
     } catch (e: any) {
       this.errorMessage = e.message;
       this.data = [];
@@ -70,8 +75,12 @@ class ExcelTableStore {
         }
       });
 
-      this.data = await excelTableService.updateCell(updatedCell);
-      this.errorMessage = '';
+      const data = await excelTableService.updateCell(updatedCell);
+
+      runInAction(() => {
+        this.data = data;
+        this.errorMessage = '';
+      });
     } catch (e: any) {
       this.errorMessage = e.message;
     } finally {
