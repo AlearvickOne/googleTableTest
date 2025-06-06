@@ -54,7 +54,7 @@ class ExcelTableStore {
   // Обновление поля и получение новых данных через back
   async updateCell(row: number, col: number, value: string | number) {
     try {
-      const existingCell = this.data.find((c) => c.row === row && c.col === col);
+      const existingCell = this.data.find((cellData) => cellData.row === row && cellData.col === col);
 
       if (existingCell?.isFormula) return;
 

@@ -16,13 +16,13 @@ export function ExcelTableRow({ rowIndex, localData, isLoading, onChange, onBlur
       <th className="bg-gray-100 border border-gray-300 text-center font-medium text-gray-600 select-none">
         {rowIndex + 1}
       </th>
-      {Array.from({ length: excelTableStore.colsQuantity }).map((_, c) => {
-        const cell = localData.find((cell) => cell.row === rowIndex + 1 && cell.col === c + 1);
+      {Array.from({ length: excelTableStore.colsQuantity }).map((_, collNumber) => {
+        const cell = localData.find((cell) => cell.row === rowIndex + 1 && cell.col === collNumber + 1);
         return (
           <ExcelTableCell
-            key={c}
+            key={collNumber}
             row={rowIndex + 1}
-            col={c + 1}
+            col={collNumber + 1}
             cell={cell}
             isLoading={isLoading}
             onChange={onChange}
